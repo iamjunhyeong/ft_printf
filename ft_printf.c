@@ -6,28 +6,28 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 20:50:14 by junhyeop          #+#    #+#             */
-/*   Updated: 2023/11/11 20:22:05 by junhyeop         ###   ########.fr       */
+/*   Updated: 2023/11/13 17:32:43 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	check_type(const char c, va_list listp)
+int	check_type(const char c, va_list ap)
 {
 	if (c == 'c')
-		return (ft_print_c(va_arg(listp, int)));
+		return (ft_print_c(va_arg(ap, int)));
 	else if (c == 's')
-		return (ft_print_s(va_arg(listp, char *)));
+		return (ft_print_s(va_arg(ap, char *)));
 	else if (c == 'p')
-		return (ft_print_p(va_arg(listp, void *)));
+		return (ft_print_p(va_arg(ap, unsigned long long)));
 	else if (c == 'd' || c == 'i')
-		return (ft_print_d(va_arg(listp, int)));
+		return (ft_print_d(va_arg(ap, int)));
 	else if (c == 'u')
-		return (ft_print_u(va_arg(listp, unsigned int)));
+		return (ft_print_u(va_arg(ap, unsigned int)));
 	else if (c == 'x')
-		return (ft_print_sx(va_arg(listp, unsigned int)));
+		return (ft_print_sx(va_arg(ap, unsigned int)));
 	else if (c == 'X')
-		return (ft_print_bx(va_arg(listp, unsigned int)));
+		return (ft_print_bx(va_arg(ap, unsigned int)));
 	else if (c == '%')
 		return (ft_print_c('%'));
 	return (-1);
@@ -35,18 +35,18 @@ int	check_type(const char c, va_list listp)
 
 int	ft_printf(const char *format, ...)
 {
-	int	idx;
-	int	len;
-	int cnt;
-	va_list listp;
+	int		idx;
+	int		len;
+	int		cnt;
+	va_list	ap;
 
-	va_start(listp, format);
+	va_start(ap, format);
 	idx = 0;
 	cnt = 0;
 	while (format[idx])
 	{
 		if (format[idx] == '%')
-			len = check_type(format[++idx], listp);
+			len = check_type(format[++idx], ap);
 		else if (format[idx])
 			len = ft_print_c(format[idx]);
 		if (len < 0)
@@ -54,6 +54,6 @@ int	ft_printf(const char *format, ...)
 		cnt += len;
 		idx++;
 	}
-	va_end(listp);
+	va_end(ap);
 	return (cnt);
 }

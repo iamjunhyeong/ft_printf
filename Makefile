@@ -1,16 +1,16 @@
-NAME = printf.a
+NAME = libftprintf.a
 CFLAGS = -Wall -Wextra -Werror
 CC = cc
 AR = ar
 ARFLAGS = -rcs
 RM = rm
 RMFLAGS = -f
-SRCS = ft_itoa_un.c \
+SRCS = ft_itoa_hex.c \
 	ft_itoa.c \
 	ft_printf.c \
-	option_utils.c \
+	printf_utils.c \
 	printf_option.c \
-
+	printf_option_2.c
 
 OBJS = $(SRCS:.c=.o)
 

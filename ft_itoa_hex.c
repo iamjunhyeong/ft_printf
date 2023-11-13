@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_un.c                                       :+:      :+:    :+:   */
+/*   ft_itoa_hex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 19:23:32 by junhyeop          #+#    #+#             */
-/*   Updated: 2023/11/11 20:18:59 by junhyeop         ###   ########.fr       */
+/*   Updated: 2023/11/11 21:48:00 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	check_len(unsigned int n)
+int	check_len_hex(unsigned long long n, int base)
 {
 	int	len;
 
@@ -21,26 +21,28 @@ int	check_len(unsigned int n)
 		len++;
 	while (n)
 	{
-		n /= 10;
+		n /= base;
 		len++;
 	}
 	return (len);
 }
 
-void	input_str(char *str, unsigned int n)
+void	input_str_hex(char *str, unsigned long long adr, int base, int caps)
 {
 	int		s;
 	int		i;
-	char	buf[10];
+	char	buf[16];
+	char	*digits;
 
+	digits = "0123456789abcdef0123456789ABCDEF";
 	s = 0;
 	i = 0;
-	if (n == 0)
+	if (adr == 0)
 		buf[i++] = 0 + 48;
-	while (n)
+	while (adr)
 	{
-		buf[i++] = n % 10 + 48;
-		n /= 10;
+		buf[i++] = digits[adr % base + (base * caps)];
+		adr /= base;
 	}
 	i--;
 	while (i >= 0)
@@ -48,15 +50,15 @@ void	input_str(char *str, unsigned int n)
 	str[s] = 0;
 }
 
-char	*ft_itoa_un(unsigned int n)
+char	*ft_itoa_hex(unsigned long long adr, int base, int caps)
 {
 	int		len;
 	char	*str;
 
-	len = check_len(n);
+	len = check_len_hex(adr, base);
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	input_str(str, n);
+	input_str_hex(str, adr, base, caps);
 	return (str);
 }

@@ -6,11 +6,11 @@
 /*   By: junhyeop <junhyeop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:15:56 by junhyeop          #+#    #+#             */
-/*   Updated: 2023/11/11 19:18:02 by junhyeop         ###   ########.fr       */
+/*   Updated: 2023/11/11 21:36:38 by junhyeop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int	check_len(int n)
 {
@@ -67,10 +67,3 @@ char	*ft_itoa(int n)
 	input_str(str, n);
 	return (str);
 }
-
-// int main()
-// {
-// 	char *s = ft_itoa(0);
-// 	printf("%s\n",s);
-// 	return (0);
-// }
